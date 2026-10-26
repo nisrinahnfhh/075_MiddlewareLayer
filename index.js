@@ -151,3 +151,14 @@ app.post(
         )
     }
 )
+
+app.put(
+    '/biodata/:id',
+    validateParams(idSchema),
+    validateBody(biodataSchema.fork(
+        ['nama', 'nim', 'kelas'],
+        field => field.required()
+    ).fork(['id'], field => field.forbidden())),
+    async (req, res) => {
+        const { id } = req.params
+        const { nama, nim, kelas } = req.body
