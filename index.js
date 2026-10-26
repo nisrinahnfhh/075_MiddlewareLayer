@@ -142,5 +142,12 @@ app.post(
             RETURNING *`,
             [id ?? null, nama, nim, kelas]
         )
+
+        return successResponse(
+        res,
+        'Data berhasil ditambahkan',
+        result.rows[0],
+        201
+        )
     }
 )
