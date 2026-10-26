@@ -129,3 +129,11 @@ app.get('/', async (req, res) => {
         result.rows
     )
 })
+
+app.post(
+    '/biodata',
+    validateBody(biodataSchema),
+    async (req, res) => {
+        const { id, nama, nim, kelas } = req.body
+    }
+)
