@@ -16,3 +16,11 @@ const pool = new Pool({
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true}))
+
+
+
+app.use((requestAnimationFrame, res, next) => {
+    const start = Date.now()
+
+}
+)
