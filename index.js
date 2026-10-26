@@ -95,3 +95,10 @@ function validateBody(schema) {
         next()
     }
 }
+
+// Middleware untuk validasi parameter ID
+function validateParams(schema) {
+    return (req, res, next) => {
+        const { error, value } = schema.validate(req.params)
+    }
+}
