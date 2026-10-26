@@ -1,6 +1,6 @@
 import express from 'express';
 import pg from 'pg';
-import joi from 'joi';
+import Joi from 'joi';
 
 const app = express();
 const port = 3000;
@@ -72,14 +72,7 @@ function validateBody(schema) {
             allowUnknown: false,
         })
 
-function validateBody(schema) {
-    return (req, res, next) => {
-        const { error, value } = schema.validate(req.body, {
-            abortEarly: false,
-            convert: true,
-            allowUnknown: false,
-        })
-         if (error) {
+        if (error) {
             return errorResponse(
                 res,
                 'Validasi input gagal',
@@ -137,7 +130,7 @@ app.post(
         const { id, nama, nim, kelas } = req.body
 
         const result = await pool.query(
-            'INSERT INTO biodata (id, nama, nim, kelas')
+            `INSERT INTO biodata (id, nama, nim, kelas)
             VALUES ($1, $2, $3, $4)
             RETURNING *`,
             [id ?? null, nama, nim, kelas]
@@ -162,3 +155,11 @@ app.put(
     async (req, res) => {
         const { id } = req.params
         const { nama, nim, kelas } = req.body
+
+        const result = await pool.query(
+                `UPDATE biodata
+                SET nama = $1, nim = $2, kelas = $3
+                WHERE id = $4
+                RETURNING *`,
+                [nama, nim, kelas, id]
+            )
