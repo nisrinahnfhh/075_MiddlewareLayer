@@ -12,3 +12,7 @@ const pool = new Pool({
     database: 'mahasiswa',
     password: 'Haechan060600'
 })
+
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true}))
